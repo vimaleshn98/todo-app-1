@@ -1,0 +1,56 @@
+pipeline{
+    agent any;
+     tools{
+       maven 'maven'
+       jdk 'JDK11'
+   }
+    stages{
+        stage("build"){
+            steps{
+                sh 'mvn clean'
+                sh 'mvn -f app/pom.xml compile'
+            }
+            post{
+                success{
+                    echo "========Maven compile stage executed successfully========"
+                }
+                failure{
+                    echo "========Maven compile stage execution failed========"
+                }
+            }
+        }
+    
+     stage("Test"){
+            steps{
+                echo "Maven Test"
+                sh 'mvn -f app/pom.xml -Dmaven.test.failure.ignore=true  test'
+                
+            }
+            post{
+                success{
+                    echo "========Maven Test stage executed successfully========"
+                     junit 'app/target/surefire-reports/*.xml'
+
+                }
+                failure{
+                    echo "========Maven Test stage execution failed========"
+                     junit 'app/target/surefire-reports/*.xml'
+                }
+            }
+        }
+       
+        
+
+    }
+    post{
+        always{
+            echo "========always========"
+        }
+        success{
+            echo "========pipeline executed successfully ========"
+        }
+        failure{
+            echo "========pipeline execution failed========"
+        }
+    }
+}
