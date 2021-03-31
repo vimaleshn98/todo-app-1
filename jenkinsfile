@@ -86,6 +86,41 @@ pipeline{
           }
         }  
         
+        
+    stage('deploy to artifactory'){
+            steps{
+                rtUpload (
+            serverId: 'artifactory_server',
+            spec: '''{
+                 "files": [
+                             {
+                                "pattern": "app/target/*.war",
+                                "target": "art-doc-dev-loc/todo-app/"
+                            }
+                        ]
+            }''',
+            )
+
+            }
+        }
+        stage('download artifact'){
+            steps{
+                 rtDownload (
+                 serverId: "artifactory_server",
+                spec:"""{
+                     "files": [
+                                {
+                                    "pattern": "art-doc-dev-loc/todo-app/**",
+                                    "target": "app/artifacts/"      
+                                }
+                            ]
+              }"""
+            )
+            
+            }
+        }
+
+        
 
     }
     post{
