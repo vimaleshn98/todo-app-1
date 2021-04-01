@@ -43,7 +43,7 @@ pipeline{
             steps{
                 withSonarQubeEnv('sonarcloud'){
                     echo 'Performing SonarQube Analysis'
-                    sh 'mvn -f app/pom.xml package sonar:sonar'
+                    sh 'mvn -f app/pom.xml verify sonar:sonar'
                 }
             }
             post{
