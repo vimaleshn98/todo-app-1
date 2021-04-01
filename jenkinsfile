@@ -66,7 +66,7 @@ pipeline{
                         def qg = waitForQualityGate() 
                         if (qg.status != 'OK')
                         {
-                            error "Pipeline failed due to gate failure "
+                            error "Pipeline failed due to gate failured "
                             
                          }
                     }
