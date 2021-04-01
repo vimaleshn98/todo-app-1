@@ -38,7 +38,42 @@ pipeline{
                 }
             }
         }
+       stage('sonar analysis'){
+            agent any
+            steps{
+                withSonarQubeEnv('sonar-server'){
+                    echo 'Performing SonarQube Analysis'
+                    sh 'mvn -f app/pom.xml package sonar:sonar'
+                }
+            }
+            post{
+                success{
+                    echo "========Code Analysis stage executed successfully========"
+
+                }
+                failure{
+                    echo "========Code Analysis stage execution failed========"
+                }
+            }
+            
+        }
+        
+         stage("Quality Gate") {
+            steps {
+              
+              timeout(time: 1, unit: 'HOURS') {
+                script{
+                        def qg = waitForQualityGate() 
+                        if (qg.status != 'OK')
+                        {
+                            error "Pipeline failed due to gate failure "
+                            
+                         }
+                    }
+              }
              
+            }
+         }      
 
     }
     post{
