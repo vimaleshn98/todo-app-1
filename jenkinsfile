@@ -118,7 +118,7 @@ pipeline{
                      spec: '''{
                              "files": [
                                       {
-                                      "pattern": "art-doc-dev-loc/*.jar",
+                                      "pattern": "art-doc-dev-loc/**",
                                       "target": "bazinga/"
                                     }
                                 ]
