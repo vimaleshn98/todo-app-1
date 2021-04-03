@@ -88,7 +88,7 @@ pipeline{
                              "files": [
                                       {
                                      "pattern": "/var/lib/jenkins/workspace/TodoApp@2/app/target/*.war",
-                                     "target": "art-doc-dev-locs/${env.BUILD_NUMBER}"
+                                     "target": "art-doc-dev-locs/${env.BUILD_NUMBER}/"
                                     }
                                 ]
                             }"""
