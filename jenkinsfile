@@ -88,7 +88,7 @@ pipeline{
                              "files": [
                                       {
                                      "pattern": "/var/lib/jenkins/workspace/TodoApp@2/app/target/*.war",
-                                     "target": "art-doc-dev-loc"
+                                     "target": "art-doc-dev-locs"
                                     }
                                 ]
                             }'''
@@ -118,7 +118,7 @@ pipeline{
                      spec: '''{
                              "files": [
                                       {
-                                      "pattern": "art-doc-dev-loc/**",
+                                      "pattern": "art-doc-dev-locs/**",
                                       "target": "bazinga/"
                                     }
                                 ]
