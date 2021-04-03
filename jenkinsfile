@@ -3,7 +3,7 @@ pipeline{
     environment {
     registry = "7349216534/todo-app"
     registryCredential = "docker"
-    dockerImage = ""
+    dockerImage = "todoapp_app:latest"
  }
      tools{
        maven 'maven'
@@ -161,7 +161,6 @@ pipeline{
              sh "cp -rf app/${env.BUILD_NUMBER}/TodoDemo-0.0.1-SNAPSHOT.war app/target/TodoDemo-0.0.1-SNAPSHOT.war" 
              sh 'docker-compose build'
              sh 'docker images'
-             dockerImage = 'todoapp_app:latest'
             }
         }
 
