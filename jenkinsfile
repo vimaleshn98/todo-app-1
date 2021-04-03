@@ -124,7 +124,7 @@ pipeline{
                              "files": [
                                       {
                                       "pattern": "art-doc-dev-locs/${env.BUILD_NUMBER}/*.war",
-                                      "target": ""
+                                      "target": "app/"
                                     }
                                 ]
                             }"""
@@ -158,7 +158,7 @@ pipeline{
         stage('Building Docker Image') {
         steps{
              sh 'docker image prune -a --force'  
-             sh "cp -rf ${env.BUILD_NUMBER}/TodoDemo-0.0.1-SNAPSHOT.war bazinga/TodoDemo-0.0.1-SNAPSHOT.war" 
+             sh "cp -rf app/${env.BUILD_NUMBER}/TodoDemo-0.0.1-SNAPSHOT.war app/bazinga/TodoDemo-0.0.1-SNAPSHOT.war" 
              sh 'docker-compose build'
          
             }
