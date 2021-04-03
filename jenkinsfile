@@ -73,8 +73,73 @@ pipeline{
         //       }
              
         //     }
-        //  }      
+        //  }  
+        stage("Deployee"){
+           when {
+                expression {
+                        currentBuild.result == null || currentBuild.result == 'SUCCESS'
+                }
+            }
+                steps{
+     
+                     rtUpload (
+                         serverId: 'artifactory-server',
+                     spec: '''{
+                             "files": [
+                                      {
+                                     "pattern": "target/*.jar",
+                                     "target": "art-doc-dev-loc"
+                                    }
+                                ]
+                            }'''
+                        )
+                    }
+            post{
+                success{
+                    echo "========Deploying executed successfully  ${New_Version}========"
 
+                }
+                
+                failure{
+                    echo "========Deploying stage execution failed========"
+                }
+            }
+        }    
+        stage("Download"){
+           when {
+                expression {
+                        currentBuild.result == null || currentBuild.result == 'SUCCESS'
+                }
+            }
+                steps{
+     
+                     
+            rtDownload (
+                         serverId: 'artifactory-server',
+                     spec: '''{
+                             "files": [
+                                      {
+                                      "pattern": "art-doc-dev-loc/Passport-0.0.1-SNAPSHOT.jar",
+                                      "target": "bazinga/"
+                                    }
+                                ]
+                            }'''
+                        )
+                    }
+            post{
+                success{
+                    echo "========Download executed successfully  ${New_Version}========"
+                    // sshagent(['ubuntu2']){
+                    // sh 'scp -r bazinga/*.jar ubuntu@18.236.173.67:/home/ubuntu/artifacts'
+                    }
+
+                }
+                
+                failure{
+                    echo "========Download stage execution failed========"
+                }
+            }
+        }
     }
     post{
         always{
