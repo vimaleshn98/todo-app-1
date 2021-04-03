@@ -87,7 +87,7 @@ pipeline{
                      spec: '''{
                              "files": [
                                       {
-                                     "pattern": "target/*.jar",
+                                     "pattern": "app/target/*.war",
                                      "target": "art-doc-dev-loc"
                                     }
                                 ]
