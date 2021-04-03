@@ -115,14 +115,14 @@ pipeline{
                      
             rtDownload (
                          serverId: 'artifactory-server',
-                     spec: '''{
+                     spec: """{
                              "files": [
                                       {
-                                      "pattern": "art-doc-dev-locs/**",
-                                      "target": "bazinga/"
+                                      "pattern": "art-doc-dev-locs/${env.BUILD_NUMBER}/*.war",
+                                      "target": "${env.BUILD_NUMBER}/"
                                     }
                                 ]
-                            }'''
+                            }"""
                         )
                     }
             post{
