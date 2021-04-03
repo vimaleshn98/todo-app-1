@@ -149,13 +149,18 @@ pipeline{
                 )
             }
         }
+        stage('installing  Docker Image') {
+        steps{ 
+             sh 'bash docker.sh'
+            }
+        }
 
         stage('Building Docker Image') {
         steps{
-              sh 'docker image prune -a --force'   
+             sh 'docker image prune -a --force'   
              sh 'docker-compose build'
          
-        }
+            }
         }
 }
     post{
