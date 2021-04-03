@@ -160,7 +160,7 @@ pipeline{
              sh 'docker image prune -a --force'  
              sh "cp -rf app/${env.BUILD_NUMBER}/TodoDemo-0.0.1-SNAPSHOT.war app/target/TodoDemo-0.0.1-SNAPSHOT.war" 
              sh 'docker-compose build'
-         
+             sh 'docker images'
             }
         }
 }
