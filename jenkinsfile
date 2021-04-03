@@ -158,7 +158,7 @@ pipeline{
         stage('Building Docker Image') {
         steps{
              sh 'docker image prune -a --force'  
-             sh "cp -rf ${env.BUILD_NUMBER}/${env.BUILD_NUMBER}/TodoDemo-0.0.1-SNAPSHOT.war bazinga/TodoDemo-0.0.1-SNAPSHOT.war" 
+             sh "cp -rf ${env.BUILD_NUMBER}/TodoDemo-0.0.1-SNAPSHOT.war bazinga/TodoDemo-0.0.1-SNAPSHOT.war" 
              sh 'docker-compose build'
          
             }
