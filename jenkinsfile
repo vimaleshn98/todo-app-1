@@ -139,7 +139,6 @@ pipeline{
                     echo "========Download stage execution failed========"
                 }
             }
-        }
     }
     post{
         always{
