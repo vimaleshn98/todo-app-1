@@ -84,14 +84,14 @@ pipeline{
      
                      rtUpload (
                          serverId: 'artifactory-server',
-                     spec: '''{
+                     spec: """{
                              "files": [
                                       {
                                      "pattern": "/var/lib/jenkins/workspace/TodoApp@2/app/target/*.war",
-                                     "target": "art-doc-dev-locs/1"
+                                     "target": "art-doc-dev-locs/${env.BUILD_NUMBER}"
                                     }
                                 ]
-                            }'''
+                            }"""
                         )
                     }
             post{
