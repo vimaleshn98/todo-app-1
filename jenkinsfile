@@ -1,5 +1,10 @@
 pipeline{
     agent any;
+    environment {
+    registry = "7349216534/todo-app"
+    registryCredential = "docker"
+     dockerImage = ""
+ }
      tools{
        maven 'maven'
        jdk 'JDK11'
@@ -144,7 +149,15 @@ pipeline{
                 )
             }
         }
-    }
+
+        stage(‘Building Docker Image’) {
+    steps{
+        script {
+             dockerImage = docker.build registry + ":${env.BUILD_NUMBER}"
+         }
+        }
+        }
+}
     post{
         always{
             echo "========always========"
