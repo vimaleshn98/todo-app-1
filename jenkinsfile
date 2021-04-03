@@ -112,7 +112,6 @@ pipeline{
                 }
             }
                 steps{
-     
                      
             rtDownload (
                          serverId: 'artifactory-server',
@@ -132,13 +131,12 @@ pipeline{
                     // sshagent(['ubuntu2']){
                     // sh 'scp -r bazinga/*.jar ubuntu@18.236.173.67:/home/ubuntu/artifacts'
                     }
-
-                }
                 
                 failure{
                     echo "========Download stage execution failed========"
                 }
             }
+        }
     }
     post{
         always{
