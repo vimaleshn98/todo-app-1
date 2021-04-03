@@ -124,7 +124,7 @@ pipeline{
                              "files": [
                                       {
                                       "pattern": "art-doc-dev-locs/${env.BUILD_NUMBER}/*.war",
-                                      "target": "${env.BUILD_NUMBER}/"
+                                      "target": ""
                                     }
                                 ]
                             }"""
